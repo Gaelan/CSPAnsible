@@ -1,0 +1,19 @@
+---
+- name: Create the student-files group
+  # Users in this group (such as the web server, which we add in the next
+  # step) have access to all student files. # Slightly confusingly, students
+  # are NOT in this group (because if they were, they might find a way to
+  # read their classmates' files).
+  group:
+    name: student-files
+- name: Add the web server to the student-files group
+  user:
+    name: www-data
+    groups:
+      - student-files
+    append: yes
+- name: Create student users
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+  loop: "{{ students }}"

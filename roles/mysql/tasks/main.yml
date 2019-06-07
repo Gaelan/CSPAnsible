@@ -1,0 +1,25 @@
+---
+- name: Install MySQL Server
+  apt:
+    name: mysql-server
+- name: Install PHP MySQL
+  apt:
+    name: php-mysql
+- name: Install Python MySQL
+  # Required to automatically set up SQL database/users
+  apt:
+    name: python-mysqldb
+- name: Updating MySQL configuration
+  copy:
+    src: mysqld.cnf
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+  notify: Restart mysql
+- name: Create MySQL database
+  mysql_db:
+    name: student_work
+- name: Create MySQL users
+  mysql_user:
+    name: "{{item.name}}"
+    password: "{{item.password}}"
+    priv: student_work.*:all
+  loop: "{{students}}"

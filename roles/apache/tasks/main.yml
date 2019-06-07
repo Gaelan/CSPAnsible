@@ -1,0 +1,18 @@
+---
+- name: Install apache
+  apt:
+    name: apache2
+- name: Enable per-user folders in Apache
+  apache2_module:
+    name: userdir
+  notify: Restart apache
+- name: Create students' web folders
+  file:
+    path: /home/{{ item.name }}/public_html
+    recurse: yes
+    group: student-files
+    state: directory
+    mode: 0770
+    owner: "{{ item.name }}"
+  loop: "{{ students }}"
+  notify: Restart apache

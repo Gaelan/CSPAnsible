@@ -1,0 +1,7 @@
+---
+- name: Install adminer
+  # In theory, we could install adminer through apt, but that appears to have
+  # been "temporarily" broken since 2017. Instead, we install it ourselves.
+  get_url:
+    url: https://www.adminer.org/latest-mysql-en.php
+    dest: /var/www/html/adminer.php

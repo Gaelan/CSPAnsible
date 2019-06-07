@@ -1,0 +1,28 @@
+---
+- name: Uninstall mod-php (used for php_simple)
+  apt:
+    name: libapache2-mod-php7.2
+    state: absent
+- name: Install PHP
+  apt:
+    name: php7.2-fpm
+- name: Configure PHP for students
+  template:
+    src: pool.conf.j2
+    dest: /etc/php/7.2/fpm/pool.d/{{ item.name }}.conf
+    backup: true
+  loop: "{{ students }}"
+  notify: Restart PHP
+- name: Enable Apache module for PHP
+  apache2_module:
+    name: proxy_fcgi
+  notify: Restart apache
+- name: Set up Apache config for PHP
+  template:
+    src: php7.2-fpm.conf.j2
+    dest: /etc/apache2/conf-available/php7.2-fpm.conf
+    backup: yes
+  notify: Restart apache
+- name: Enable Apache config for PHP
+  command: a2enconf php7.2-fpm creates=/etc/apache2/conf-enabled/php7.2-fpm.conf
+  notify: Restart apache

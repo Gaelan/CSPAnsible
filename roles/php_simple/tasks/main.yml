@@ -1,0 +1,22 @@
+---
+- name: Disable Apache module for FPM (used for php_secure)
+  apache2_module:
+    name: proxy_fcgi
+    state: absent
+  notify: Restart apache
+- name: Disable Apache config for FPM (used for php_secure)
+  command: a2disconf php7.2-fpm removes=/etc/apache2/conf-enabled/php7.2-fpm.conf
+  notify: Restart apache
+- name: Ensure FPM (used for php_secure) is disabled
+  apt:
+    name: php7.2-fpm
+    state: absent
+- name: Install PHP
+  apt:
+    name: libapache2-mod-php7.2
+- name: Allow student sites to include PHP
+  copy:
+    src: php7.2.conf
+    dest: /etc/apache2/mods-enabled/php7.2.conf
+    backup: yes
+  notify: Restart apache

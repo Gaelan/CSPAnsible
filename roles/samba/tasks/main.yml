@@ -1,0 +1,13 @@
+---
+- name: Install Samba
+  apt:
+    name: samba
+- name: Update samba config file
+  copy:
+    dest: /etc/samba/smb.conf
+    src: smb.conf
+    backup: yes
+  notify: Restart samba
+- name: Setting SMB passwords for students
+  shell: "printf '{{ item.password }}\n{{ item.password }}\n' | smbpasswd -a -s {{ item.name }}"
+  loop: "{{ students }}"

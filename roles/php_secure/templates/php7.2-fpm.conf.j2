@@ -1,0 +1,39 @@
+# THIS FILE WAS PLACED HERE BY THE CONFIGURATION SCRIPT. If you're modifying 
+# this file, you probably want to modify the version in the configuration
+# this then re-run the configuration script. Otherwise, the next time you run
+# the script, your changes will be clobbered.
+
+# Redirect to local php-fpm if mod_php is not available
+<IfModule !mod_php7.c>
+<IfModule proxy_fcgi_module>
+    # Enable http authorization headers
+    <IfModule setenvif_module>
+    SetEnvIfNoCase ^Authorization$ "(.+)" HTTP_AUTHORIZATION=$1
+    </IfModule>
+
+{% for student in students %}
+    <Directory "/home/{{ student.name }}/public_html">
+        <FilesMatch ".+\.ph(ar|p|tml)$">
+            SetHandler "proxy:unix:/run/php/{{student.name}}.php7.2-fpm.sock|fcgi://localhost"
+        </FilesMatch>
+    </Directory>
+{% endfor %}
+
+    <Directory "/var/www/html">
+        <FilesMatch ".+\.ph(ar|p|tml)$">
+            SetHandler "proxy:unix:/run/php/php7.2-fpm.sock|fcgi://localhost"
+        </FilesMatch>
+    </Directory>
+
+    <FilesMatch ".+\.phps$">
+        # Deny access to raw php sources by default
+        # To re-enable it's recommended to enable access to the files
+        # only in specific virtual host or directory
+        Require all denied
+    </FilesMatch>
+    # Deny access to files without filename (e.g. '.php')
+    <FilesMatch "^\.ph(ar|p|ps|tml)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+</IfModule>
