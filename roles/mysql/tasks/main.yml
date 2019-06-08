@@ -20,6 +20,7 @@
 - name: Create MySQL users
   mysql_user:
     name: "{{item.name}}"
+    host: "%"
     password: "{{item.password}}"
     priv: student_work.*:all
   loop: "{{students}}"
