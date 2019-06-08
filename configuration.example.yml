@@ -1,0 +1,15 @@
+---
+students:
+  - { name: anne, password: "pass" }
+  - { name: bob, password: "pass" }
+  - { name: carol, password: "pass" }
+  - { name: david, password: "pass" }
+  - { name: eleanor, password: "pass" }
+
+# I've included two configurations for PHP, which I call "secure" and
+# "simple". The secure configuration isolates students' code so that it can't
+# messes with other students' stuff, but it also has more moving parts, so to
+# speak. If something goes wrong and you're not in the mood to troubleshoot,
+# switch to "simple" by changing the line below (then running the configuration
+# script).
+php_mode: secure
