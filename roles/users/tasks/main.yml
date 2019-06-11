@@ -15,5 +15,5 @@
 - name: Create student users
   user:
     name: "{{ item.name }}"
-    password: "{{ item.password | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+    password: "{{ ((item.id | string) + '!') | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
   loop: "{{ students }}"
