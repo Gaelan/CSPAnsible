@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - role: php_secure
+  - role: php/secure
     when: php_mode == "secure"
-  - role: php_simple
+  - role: php/simple
     when: php_mode == "simple"
