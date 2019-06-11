@@ -1,10 +1,10 @@
 ---
 students:
-  - { name: anne, password: "pass" }
-  - { name: bob, password: "pass" }
-  - { name: carol, password: "pass" }
-  - { name: david, password: "pass" }
-  - { name: eleanor, password: "pass" }
+  - { name: anne, id: 111111 }
+  - { name: bob, id: 222222 }
+  - { name: carol, id: 333333 }
+  - { name: david, id: 444444 }
+  - { name: eleanor, id: 555555 }
 
 # I've included two configurations for PHP, which I call "secure" and
 # "simple". The secure configuration isolates students' code so that it can't

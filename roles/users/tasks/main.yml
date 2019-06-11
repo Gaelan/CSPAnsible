@@ -1,7 +1,7 @@
 ---
 - name: Create the student-files group
   # Users in this group (such as the web server, which we add in the next
-  # step) have access to all student files. # Slightly confusingly, students
+  # step) have access to all student files. Slightly confusingly, students
   # are NOT in this group (because if they were, they might find a way to
   # read their classmates' files).
   group:

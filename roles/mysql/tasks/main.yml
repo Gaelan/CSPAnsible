@@ -21,6 +21,6 @@
   mysql_user:
     name: "{{item.name}}"
     host: "%"
-    password: "{{item.password}}"
+    password: "{{item.id}}!"
     priv: student_work.*:all
   loop: "{{students}}"
