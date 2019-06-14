@@ -2,6 +2,7 @@ cd $(dirname "$0")
 if ! [ -f configuration.yml ]; then
     cp configuration.example.yml configuration.yml
     echo "Please edit configuration.yml (for example, to add the list of students) then run this script again."
+    exit
 fi
 
 if ! [ -x "$(command -v ansible-playbook)" ]; then
