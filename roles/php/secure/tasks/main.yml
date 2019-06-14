@@ -6,6 +6,12 @@
 - name: Install PHP
   apt:
     name: php7.2-fpm
+- name: Copy PHP config file
+  copy:
+    src: php.ini
+    dest: /etc/php/7.2/fpm/php.ini
+    backup: true
+  notify: Restart PHP
 - name: Configure PHP for students
   template:
     src: pool.conf.j2

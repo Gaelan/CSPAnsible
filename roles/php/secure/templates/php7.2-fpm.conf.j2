@@ -12,7 +12,7 @@
     </IfModule>
 
 {% for student in students %}
-    <Directory "/home/{{ student.name }}/public_html">
+    <Directory "/var/www/students/{{ student.name }}">
         <FilesMatch ".+\.ph(ar|p|tml)$">
             SetHandler "proxy:unix:/run/php/{{student.name}}.php7.2-fpm.sock|fcgi://localhost"
         </FilesMatch>

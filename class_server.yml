@@ -5,4 +5,7 @@
     - configuration.yml
 
   roles:
+    - apache
     - mysql
+    - php
+    - adminer
