@@ -6,9 +6,14 @@
   apache2_module:
     name: userdir
   notify: Restart apache
+- name: Configure per-user folders in Apache
+  copy:
+    src: userdir.conf
+    dest: /etc/apache2/mods-available
+  notify: Restart apache
 - name: Create students' web folders
   file:
-    path: /home/{{ item.name }}/public_html
+    path: /var/www/students/{{ item.name }}
     recurse: yes
     group: student-files
     state: directory
