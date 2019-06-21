@@ -2,6 +2,12 @@
 - name: Install apache
   apt:
     name: apache2
+- name: Add the web server to the student-files group
+  user:
+    name: www-data
+    groups:
+      - student-files
+    append: yes
 - name: Enable per-user folders in Apache
   apache2_module:
     name: userdir

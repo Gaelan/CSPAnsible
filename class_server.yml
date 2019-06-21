@@ -2,10 +2,12 @@
 - hosts: localhost
   connection: local
   vars_files:
-    - configuration.yml
+    - settings.yml
 
   roles:
+    - automatic-updates
     - apache
     - mysql
     - php
     - adminer
+    - samba

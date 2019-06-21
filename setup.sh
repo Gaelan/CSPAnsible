@@ -1,7 +1,7 @@
 cd $(dirname "$0")
-if ! [ -f configuration.yml ]; then
-    cp configuration.example.yml configuration.yml
-    echo "Please edit configuration.yml (for example, to add the list of students) then run this script again."
+if ! [ -f settings.yml ]; then
+    cp settings.example.yml settings.yml
+    echo "Please edit settings.yml (for example, to add the list of students) then run this script again."
     exit
 fi
 

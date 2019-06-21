@@ -6,12 +6,13 @@
   # read their classmates' files).
   group:
     name: student-files
-- name: Add the web server to the student-files group
+- name: Add admins to the student-files group
   user:
-    name: www-data
+    name: "{{item}}"
     groups:
       - student-files
     append: yes
+  loop: "{{ admins }}"
 - name: Create student users
   user:
     name: "{{ item.name }}"

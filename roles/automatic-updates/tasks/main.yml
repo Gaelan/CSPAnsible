@@ -1,0 +1,9 @@
+---
+- name: Install automatic updater
+  apt:
+    name: unattended-upgrades
+- name: Set automatic update configuration
+  copy:
+    src: 20automatic-upgrades
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    backup: true

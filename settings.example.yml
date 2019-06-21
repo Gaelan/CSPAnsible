@@ -1,4 +1,12 @@
 ---
+# Users who are able to administer the system. This list should probably
+# include the user you created when you installed the OS, but you could add
+# more as well.
+admins:
+  - ericwolgie
+
+# The students who need access to the system. Their password will be their
+# student ID, followed by an exclamation point.
 students:
   - { name: anne, id: 111111 }
   - { name: bob, id: 222222 }
